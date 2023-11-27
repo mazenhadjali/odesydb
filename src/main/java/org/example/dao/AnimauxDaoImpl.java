@@ -310,6 +310,7 @@ public class AnimauxDaoImpl implements AnimauxDao {
 
         return count;
     }
+
     public int countByColumngratherThanZero(String column, String gouvernorat, String delegation, String secteur, String complexeRes) {
         int count = 0;
         StringBuilder queryBuilder = new StringBuilder("SELECT COUNT(*) FROM animaux AS s");
@@ -412,7 +413,7 @@ public class AnimauxDaoImpl implements AnimauxDao {
         return Math.toIntExact(count);
     }
 
-    public int countpersons(String gouvernorat, String delegation, String secteur, String complexeRes) {
+    public int countpersonscahcehif5(String gouvernorat, String delegation, String secteur, String complexeRes) {
         int count = 0;
         StringBuilder queryBuilder = new StringBuilder("SELECT COUNT(*) FROM animaux AS s");
         queryBuilder.append(" INNER JOIN personne AS p ON s.id = p.idAnimaux");
@@ -462,6 +463,161 @@ public class AnimauxDaoImpl implements AnimauxDao {
 
         return Math.toIntExact(count);
     }
+
+    public int countpersonschepsinf30(String gouvernorat, String delegation, String secteur, String complexeRes) {
+        int count = 0;
+        StringBuilder queryBuilder = new StringBuilder("SELECT COUNT(*) FROM animaux AS s");
+        queryBuilder.append(" INNER JOIN personne AS p ON s.id = p.idAnimaux");
+        // Add a condition to check if the specified column is not equal to 0
+        queryBuilder.append(" WHERE 30 >= ( s.ovins_chep + s.ovins_chev + s.ovins_bet ) ");
+
+        if (gouvernorat != null && !gouvernorat.equals(SingletonJFrame1.defaultOption) && !gouvernorat.isEmpty()) {
+            queryBuilder.append(" AND p.gouvernorat = ?");
+            if (delegation != null && !delegation.equals(SingletonJFrame1.defaultOption) && !delegation.isEmpty()) {
+                queryBuilder.append(" AND p.delegation = ?");
+                if (secteur != null && !secteur.equals(SingletonJFrame1.defaultOption) && !secteur.isEmpty()) {
+                    queryBuilder.append(" AND p.secteur = ?");
+                    if (complexeRes != null && !complexeRes.equals(SingletonJFrame1.defaultOption) && !complexeRes.isEmpty()) {
+                        queryBuilder.append(" AND p.complexeRes = ?");
+                    }
+                }
+            }
+        }
+
+
+        PreparedStatement statement = null;
+        try {
+            statement = connection.prepareStatement(queryBuilder.toString());
+            int parameterIndex = 1;
+            if (gouvernorat != null && !gouvernorat.equals(SingletonJFrame1.defaultOption) && !gouvernorat.isEmpty()) {
+                statement.setString(parameterIndex++, gouvernorat);
+                if (delegation != null && !delegation.equals(SingletonJFrame1.defaultOption) && !delegation.isEmpty()) {
+                    statement.setString(parameterIndex++, delegation);
+                    if (secteur != null && !secteur.equals(SingletonJFrame1.defaultOption) && !secteur.isEmpty()) {
+                        statement.setString(parameterIndex++, secteur);
+                        if (complexeRes != null && !complexeRes.equals(SingletonJFrame1.defaultOption) && !complexeRes.isEmpty()) {
+                            statement.setString(parameterIndex, complexeRes);
+                        }
+                    }
+                }
+            }
+
+            ResultSet resultSet = statement.executeQuery();
+
+            if (resultSet.next()) {
+                count = resultSet.getInt(1);
+            }
+        } catch (SQLException e) {
+            System.out.println(statement);
+            e.printStackTrace();
+        }
+
+        return Math.toIntExact(count);
+    }
+
+    public int sumchepsinf30(String gouvernorat, String delegation, String secteur, String complexeRes) {
+        long count = 0;
+        StringBuilder queryBuilder = new StringBuilder("SELECT SUM(s.ovins_chep + s.ovins_chev + s.ovins_bet ) FROM animaux AS s");
+        queryBuilder.append(" INNER JOIN personne AS p ON s.id = p.idAnimaux");
+        // Add a condition to check if the specified column is not equal to 0
+        queryBuilder.append(" WHERE 30 >= ( s.ovins_chep + s.ovins_chev + s.ovins_bet ) ");
+
+        if (gouvernorat != null && !gouvernorat.equals(SingletonJFrame1.defaultOption) && !gouvernorat.isEmpty()) {
+            queryBuilder.append(" AND p.gouvernorat = ?");
+            if (delegation != null && !delegation.equals(SingletonJFrame1.defaultOption) && !delegation.isEmpty()) {
+                queryBuilder.append(" AND p.delegation = ?");
+                if (secteur != null && !secteur.equals(SingletonJFrame1.defaultOption) && !secteur.isEmpty()) {
+                    queryBuilder.append(" AND p.secteur = ?");
+                    if (complexeRes != null && !complexeRes.equals(SingletonJFrame1.defaultOption) && !complexeRes.isEmpty()) {
+                        queryBuilder.append(" AND p.complexeRes = ?");
+                    }
+                }
+            }
+        }
+
+
+        PreparedStatement statement = null;
+        try {
+            statement = connection.prepareStatement(queryBuilder.toString());
+            int parameterIndex = 1;
+            if (gouvernorat != null && !gouvernorat.equals(SingletonJFrame1.defaultOption) && !gouvernorat.isEmpty()) {
+                statement.setString(parameterIndex++, gouvernorat);
+                if (delegation != null && !delegation.equals(SingletonJFrame1.defaultOption) && !delegation.isEmpty()) {
+                    statement.setString(parameterIndex++, delegation);
+                    if (secteur != null && !secteur.equals(SingletonJFrame1.defaultOption) && !secteur.isEmpty()) {
+                        statement.setString(parameterIndex++, secteur);
+                        if (complexeRes != null && !complexeRes.equals(SingletonJFrame1.defaultOption) && !complexeRes.isEmpty()) {
+                            statement.setString(parameterIndex, complexeRes);
+                        }
+                    }
+                }
+            }
+
+            ResultSet resultSet = statement.executeQuery();
+
+            if (resultSet.next()) {
+                count = resultSet.getInt(1);
+            }
+        } catch (SQLException e) {
+            System.out.println(statement);
+            e.printStackTrace();
+        }
+
+        return Math.toIntExact(count);
+    }
+
+
+    public int sumchepstotalcheps(String gouvernorat, String delegation, String secteur, String complexeRes) {
+        long count = 0;
+        StringBuilder queryBuilder = new StringBuilder("SELECT SUM(s.ovins_chep + s.ovins_chev + s.ovins_bet ) FROM animaux AS s");
+        queryBuilder.append(" INNER JOIN personne AS p ON s.id = p.idAnimaux");
+        // Add a condition to check if the specified column is not equal to 0
+        queryBuilder.append(" WHERE 1=1 ");
+
+        if (gouvernorat != null && !gouvernorat.equals(SingletonJFrame1.defaultOption) && !gouvernorat.isEmpty()) {
+            queryBuilder.append(" AND p.gouvernorat = ?");
+            if (delegation != null && !delegation.equals(SingletonJFrame1.defaultOption) && !delegation.isEmpty()) {
+                queryBuilder.append(" AND p.delegation = ?");
+                if (secteur != null && !secteur.equals(SingletonJFrame1.defaultOption) && !secteur.isEmpty()) {
+                    queryBuilder.append(" AND p.secteur = ?");
+                    if (complexeRes != null && !complexeRes.equals(SingletonJFrame1.defaultOption) && !complexeRes.isEmpty()) {
+                        queryBuilder.append(" AND p.complexeRes = ?");
+                    }
+                }
+            }
+        }
+
+
+        PreparedStatement statement = null;
+        try {
+            statement = connection.prepareStatement(queryBuilder.toString());
+            int parameterIndex = 1;
+            if (gouvernorat != null && !gouvernorat.equals(SingletonJFrame1.defaultOption) && !gouvernorat.isEmpty()) {
+                statement.setString(parameterIndex++, gouvernorat);
+                if (delegation != null && !delegation.equals(SingletonJFrame1.defaultOption) && !delegation.isEmpty()) {
+                    statement.setString(parameterIndex++, delegation);
+                    if (secteur != null && !secteur.equals(SingletonJFrame1.defaultOption) && !secteur.isEmpty()) {
+                        statement.setString(parameterIndex++, secteur);
+                        if (complexeRes != null && !complexeRes.equals(SingletonJFrame1.defaultOption) && !complexeRes.isEmpty()) {
+                            statement.setString(parameterIndex, complexeRes);
+                        }
+                    }
+                }
+            }
+
+            ResultSet resultSet = statement.executeQuery();
+
+            if (resultSet.next()) {
+                count = resultSet.getInt(1);
+            }
+        } catch (SQLException e) {
+            System.out.println(statement);
+            e.printStackTrace();
+        }
+
+        return Math.toIntExact(count);
+    }
+
 
     public int countotalpersonsarea(String gouvernorat, String delegation, String secteur, String complexeRes) {
         int count = 0;

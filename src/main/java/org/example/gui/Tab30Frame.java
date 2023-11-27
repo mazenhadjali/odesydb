@@ -13,8 +13,14 @@ public class Tab30Frame extends JFrame {
     int totalvacheinf5;
     int totalvaches;
     int countpersonsvaches;
-
     int counttotalpersonsarea;
+
+    int totalchempsinf30;
+
+    int totalcheps;
+
+    int countpersonschempsinf30;
+
 
     AnimauxDaoImpl animauxDao = new AnimauxDaoImpl();
 
@@ -22,9 +28,13 @@ public class Tab30Frame extends JFrame {
 
         totalvacheinf5 = animauxDao.sumtotalvachinfeg5(selectedGouvernorat, selectedDelegation, selectedSecteur, selectedComplexeRes);
         totalvaches = animauxDao.sumtotalvaches(selectedGouvernorat, selectedDelegation, selectedSecteur, selectedComplexeRes);
-        countpersonsvaches = animauxDao.countpersons(selectedGouvernorat, selectedDelegation, selectedSecteur, selectedComplexeRes);
+        countpersonsvaches = animauxDao.countpersonscahcehif5(selectedGouvernorat, selectedDelegation, selectedSecteur, selectedComplexeRes);
 
         counttotalpersonsarea = animauxDao.countotalpersonsarea(selectedGouvernorat, selectedDelegation, selectedSecteur, selectedComplexeRes);
+
+        totalchempsinf30 = animauxDao.sumchepsinf30(selectedGouvernorat, selectedDelegation, selectedSecteur, selectedComplexeRes);
+        totalcheps = animauxDao.sumchepstotalcheps(selectedGouvernorat, selectedDelegation, selectedSecteur, selectedComplexeRes);
+        countpersonschempsinf30 = animauxDao.countpersonschepsinf30(selectedGouvernorat, selectedDelegation, selectedSecteur, selectedComplexeRes);
 
         // Set the title of the JFrame
         setTitle("جدول 30 :تصنيف الماشية");
@@ -42,7 +52,7 @@ public class Tab30Frame extends JFrame {
         String[] columnNames = {"", "عدد الرؤوس", "النسبة", "عدد الأشخاص", "النسبة"};
         String[][] data = {
                 {String.format("%.2f%%", ((countpersonsvaches * 100.0) / counttotalpersonsarea)), "" + countpersonsvaches, String.format("%.2f%%", ((totalvacheinf5 * 100.0) / totalvaches)), "" + totalvacheinf5, "ابقار اقل أو يساوي من 5 رؤوس"},
-                {"", "", "", "", " أغنام و ماعز أقل أو يساوي من 30"},
+                {String.format("%.2f%%", ((countpersonschempsinf30 * 100.0) / counttotalpersonsarea)), "" + countpersonschempsinf30, String.format("%.2f%%", ((totalchempsinf30 * 100.0) / totalcheps)), "" + totalchempsinf30, " أغنام و ماعز أقل أو يساوي من 30"},
         };
         //"%.2f"  mou3adel
 
