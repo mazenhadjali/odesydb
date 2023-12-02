@@ -7,6 +7,8 @@ import javax.swing.*;
 import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.JTableHeader;
 import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 
@@ -95,6 +97,26 @@ public class Tab6Frame extends PrintableFrame {
 
         // Add the JScrollPane to the JFrame
         add(scrollPane, BorderLayout.CENTER);
+        // Create a menu bar
+        JMenuBar menuBar = new JMenuBar();
+        setJMenuBar(menuBar);
+
+        // Create a "File" menu
+        JMenu fileMenu = new JMenu("ملف");
+        menuBar.add(fileMenu);
+
+        // Create a "Print" menu item
+        JMenuItem printMenuItem = new JMenuItem("طباعة");
+        fileMenu.add(printMenuItem);
+
+        // Add an ActionListener to the "Print" menu item
+        printMenuItem.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                // Call the print method to print the frame content
+                saveTableAsImage(table);
+            }
+        });
     }
 
 }
