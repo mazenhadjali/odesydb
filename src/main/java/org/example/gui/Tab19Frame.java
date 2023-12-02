@@ -1,5 +1,6 @@
 package org.example.gui;
 
+import org.example.Utils.PrintableFrame;
 import org.example.dao.SuperficieDaoImpl;
 import org.example.dao.SuperficieLabDaoImpl;
 
@@ -10,7 +11,7 @@ import java.awt.*;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 
-public class Tab19Frame extends JFrame {
+public class Tab19Frame extends PrintableFrame {
     private static final SuperficieDaoImpl superficieDao = new SuperficieDaoImpl();
 
     int E_0;

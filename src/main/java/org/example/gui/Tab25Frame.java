@@ -1,5 +1,6 @@
 package org.example.gui;
 
+import org.example.Utils.PrintableFrame;
 import org.example.dao.AnimauxDaoImpl;
 import org.example.dao.PersonneDaoImpl;
 
@@ -10,7 +11,7 @@ import java.awt.*;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 
-public class Tab25Frame extends JFrame {
+public class Tab25Frame extends PrintableFrame {
     private static final AnimauxDaoImpl animauxDao = new AnimauxDaoImpl();
 
     int ruches_moderne;

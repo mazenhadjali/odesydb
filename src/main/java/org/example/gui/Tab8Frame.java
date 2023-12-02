@@ -1,5 +1,6 @@
 package org.example.gui;
 
+import org.example.Utils.PrintableFrame;
 import org.example.dao.ConjointDaoImpl;
 import org.example.dao.PersonneDaoImpl;
 
@@ -8,7 +9,7 @@ import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.JTableHeader;
 import java.awt.*;
 
-public class Tab8Frame extends JFrame {
+public class Tab8Frame extends PrintableFrame {
     private static final ConjointDaoImpl conjointDao = new ConjointDaoImpl();
 
     int f1, f2, f3, f4, f5, f6, f7;

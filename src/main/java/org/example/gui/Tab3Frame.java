@@ -1,5 +1,6 @@
 package org.example.gui;
 
+import org.example.Utils.PrintableFrame;
 import org.example.dao.PersonneDaoImpl;
 
 import javax.swing.*;
@@ -7,7 +8,7 @@ import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.JTableHeader;
 import java.awt.*;
 
-public class Tab3Frame extends JFrame {
+public class Tab3Frame extends PrintableFrame {
     private static final PersonneDaoImpl personneDao = new PersonneDaoImpl();
 
     int f1, f2, f3, f4, f5, f6, f7, f8;
