@@ -202,7 +202,7 @@ public class Utils {
         Double oliviers_irrigue = getCellValueAsDouble(row.getCell(firstcol + 64));
         Double paturage = getCellValueAsDouble(row.getCell(firstcol + 65));
 
-        Double total_pluviale = grains_pluviale + alimentation_pluviale + legumineuses_pluviale + legumes_pluviale + agr_indus_pluviale + arb_fruit_pluviale + oliviers_pluviale + paturage;
+        Double total_pluviale = grains_pluviale + alimentation_pluviale + legumineuses_pluviale + legumes_pluviale + agr_indus_pluviale + arb_fruit_pluviale + oliviers_pluviale;
         Double total_irrigue = grains_irrigue + alimentation_irrigue + legumineuses_irrigue + legumes_irrigue + agr_indus_irrigue + arb_fruit_irrigue + oliviers_irrigue;
 
         int meca_agr = getCellValueAsInt(row.getCell(firstcol + 66));

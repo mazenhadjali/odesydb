@@ -604,7 +604,6 @@ public class AnimauxDaoImpl implements AnimauxDao {
                     }
                 }
             }
-
             ResultSet resultSet = statement.executeQuery();
 
             if (resultSet.next()) {
